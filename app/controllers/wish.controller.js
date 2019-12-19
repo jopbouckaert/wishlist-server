@@ -7,11 +7,8 @@ exports.create = (req, res) => {
     if (req.query.key == process.env.API_KEY) {
         // Create a Wish
         const wish = new Wish({
-            superCapVoltage: req.body.superCapVoltage || null,
-            chargingPower: req.body.chargingPower || null,
-            consumptionPower: req.body.consumptionPower || null,
-            controllerTemperature: req.body.controllerTemperature || null
-
+            wish: req.body.wish || null,
+            received: req.body.received || false,
         });
 
         // Save Wish in the database
@@ -83,10 +80,8 @@ exports.update = (req, res) => {
 
         // Find wish and update it with the request body
         Wish.findByIdAndUpdate(req.params.tringId, {
-            superCapVoltage: req.body.superCapVoltage || "undefined",
-            chargingPower: req.body.chargingPower || "undefined",
-            consumptionPower: req.body.consumptionPower || "undefined",
-            controllerTemperature: req.body.controllerTemperature || "undefined"
+            wish: req.body.wish || null,
+            received: req.body.received || false,
         }, { new: true })
             .then(wish => {
                 if (!wish) {
