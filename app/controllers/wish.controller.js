@@ -7,7 +7,10 @@ exports.create = (req, res) => {
     if (req.query.key == process.env.API_KEY) {
         // Create a Wish
         const wish = new Wish({
+            wish_id: req.body.wish,
             wish: req.body.wish || null,
+            price: req.body.price || null,
+            image: req.body.image || null,
             received: req.body.received || false,
         });
 
@@ -51,53 +54,53 @@ exports.findLast = (req, res) => {
     })
 };
 
-// Find a single wish with a tringId
+// Find a single wish with a wishId
 exports.findOne = (req, res) => {
-    Wish.findById(req.params.tringId)
+    Wish.findById(req.params.wish_id)
         .then(wish => {
             if (!wish) {
                 return res.status(404).send({
-                    message: "Wish not found with id " + req.params.tringId
+                    message: "Wish not found with id " + req.params.wish_id
                 });
             }
             res.send(wish);
         }).catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: "Wish not found with id " + req.params.tringId
+                    message: "Wish not found with id " + req.params.wish_id
                 });
             }
             return res.status(500).send({
-                message: "Error retrieving wish with id " + req.params.tringId
+                message: "Error retrieving wish with id " + req.params.wish_id
             });
         });
 };
 
-// Update a wish identified by the tringId in the request
+// Update a wish identified by the wishId in the request
 exports.update = (req, res) => {
 
     if (req.query.key == process.env.API_KEY) {
 
         // Find wish and update it with the request body
-        Wish.findByIdAndUpdate(req.params.tringId, {
+        Wish.findByIdAndUpdate(req.params.wish_id, {
             wish: req.body.wish || null,
             received: req.body.received || false,
         }, { new: true })
             .then(wish => {
                 if (!wish) {
                     return res.status(404).send({
-                        message: "Wish not found with id " + req.params.tringId
+                        message: "Wish not found with id " + req.params.wish_id
                     });
                 }
                 res.send(wish);
             }).catch(err => {
                 if (err.kind === 'ObjectId') {
                     return res.status(404).send({
-                        message: "Wish not found with id " + req.params.tringId
+                        message: "Wish not found with id " + req.params.wish_id
                     });
                 }
                 return res.status(500).send({
-                    message: "Error updating wish with id " + req.params.tringId
+                    message: "Error updating wish with id " + req.params.wish_id
                 });
             });
     } else {
@@ -107,27 +110,27 @@ exports.update = (req, res) => {
     }
 };
 
-// Delete a wish with the specified tringId in the request
+// Delete a wish with the specified wishId in the request
 exports.delete = (req, res) => {
 
     if (req.query.key == process.env.API_KEY) {
 
-        Wish.findByIdAndRemove(req.params.tringId)
+        Wish.findByIdAndRemove(req.params.wish_id)
             .then(wish => {
                 if (!wish) {
                     return res.status(404).send({
-                        message: "Wish not found with id " + req.params.tringId
+                        message: "Wish not found with id " + req.params.wish_id
                     });
                 }
                 res.send({ message: "Wish deleted successfully!" });
             }).catch(err => {
                 if (err.kind === 'ObjectId' || err.name === 'NotFound') {
                     return res.status(404).send({
-                        message: "Wish not found with id " + req.params.tringId
+                        message: "Wish not found with id " + req.params.wish_id
                     });
                 }
                 return res.status(500).send({
-                    message: "Could not delete wish with id " + req.params.tringId
+                    message: "Could not delete wish with id " + req.params.wish_id
                 });
             });
     } else {
