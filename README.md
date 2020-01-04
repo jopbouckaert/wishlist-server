@@ -1,4 +1,4 @@
-# Tring
+# WishList Server
 
 ## Install MongoDB
 https://docs.mongodb.com/manual/installation/
@@ -22,8 +22,11 @@ npm start
 `POST /wishes`
 ```json
 {
-    "wish": "good grades",
-    "received": true
+    "wish_id": 1,
+    "wish": "Good grades",
+    "price": "999 euro",
+    "image": "http://cminsure.com/wp-content/uploads/ContentImage-GradeAPlus.jpg-550x0.jpg",
+    "received": false,
 }
 ```
 
@@ -35,17 +38,10 @@ npm start
 
 `GET /wishes/:wishId`
 
-```json
-```
 
 ### Updating data
 
 `PUT /wishes/:wishId`
-
-```json
-{
-}
-```
 
  ### Delete data
 `DELETE /wishes/:wishId`
