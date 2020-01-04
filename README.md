@@ -64,3 +64,18 @@ docker build -t wishlist-server .
 docker run -d --name wishlist-server --env-file ./.env -p 3000:3000  wishlist-server
 ```
 
+## Meta
+
+Jop Bouckaert – [@Jop09071999](https://twitter.com/Jop09071999) – jop.bouckaert@outlook.com
+
+Distributed under the Apache-2.0 license. See `LICENSE` for more information.
+
+[https://github.com/jopbouckaert](https://github.com/jopbouckaert)
+
+## Contributing
+
+1. Fork it (<https://github.com/vives-mobile-apps-2019/react-native-demo-assignment-2-jopbouckaert>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
